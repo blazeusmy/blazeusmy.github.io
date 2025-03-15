@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>x93代练</title>
+    <link rel="icon" type="image/x-icon" href="第一版.png">
+    <!-- 如果需要支持更多设备，可以添加以下代码 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="第一版.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="第一版.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="第一版.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 500px;
+            background: url('f11.jpg') center;
+            background-size: cover;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            margin: 0 auto;
+        }
+
+        .header {
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('R.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: auto;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            padding: 20px 15px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: swing 3s ease-in-out infinite;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background-color: white;
+            padding: 8px;
+            object-fit: contain;
+            display: block;
+        }
+
+        @keyframes swing {
+            0% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+            100% {
+                transform: rotate(-5deg);
+            }
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3),
+                         0 0 20px rgba(255,255,255,0.2);
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: uppercase;
+            background: linear-gradient(120deg, #ff3366, #ff9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding: 0 10px;
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.3),
+                            0 0 20px rgba(255,255,255,0.2);
+            }
+            50% {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.5),
+                            0 0 30px rgba(255,255,255,0.4);
+            }
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff3366, #ff9933);
+            border-radius: 3px;
+        }
+
+        .service-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .service-button {
+            background-color: rgba(255,255,255,0.9);
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            background: linear-gradient(145deg, #ffffff, #f8f8f8);
+            color: transparent;
+            background-image: linear-gradient(45deg, #ffd700, #ffb700);
+            -webkit-background-clip: text;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.1);
+        }
+
+        .service-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffd700, #ffb700);
+            border-radius: 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .service-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 8px rgba(255,215,0,0.2);
+        }
+
+        .contact-buttons {
+            margin: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .wechat-button {
+            background-color: #2aae67;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(42,174,103,0.2);
+            transition: transform 0.2s;
+        }
+
+        .wechat-button:active {
+            transform: scale(0.98);
+        }
+
+        .no-referral {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+            margin: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 15px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(145deg, #ffffff, #f8f8f8);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            border-radius: 12px;
+            z-index: -1;
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(120deg, #ff6b6b, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .feature h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700);
+            border-radius: 3px;
+        }
+
+        .feature p {
+            color: #444;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .feature p span {
+            display: block;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        .feature:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .regions {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            margin: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .regions-title {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .region-list {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .region-item {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 3px 3px 6px rgba(0,0,0,0.1), -3px -3px 6px rgba(255,255,255,0.8);
+            transition: transform 0.2s ease;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            padding: 15px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 15px;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #ffffff, #f8f8f8);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .service-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #2aae67, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-top: 15px;
+            padding: 0 10px;
+        }
+
+        .contact-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            background-color: #2aae67;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        /* 添加移动端点击态 */
+        @media (hover: none) {
+            .service-button:active,
+            .wechat-button:active,
+            .service-card:active {
+                opacity: 0.8;
+            }
+        }
+
+        /* 针对不同屏幕尺寸的优化 */
+        @media screen and (max-width: 320px) {
+            .title {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+            .service-button {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            body {
+                width: 100%;
+            }
+            
+            .page-container {
+                width: 500px;
+            }
+            
+            .service-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #f8f8f8;
+            padding: 25px 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            width: 85%;
+            max-width: 340px;
+            animation: scaleIn 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
+            display: block;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 10px;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-code:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .close-button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        @keyframes scaleIn {
+            from { 
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .service-image {
+            width: 100%;
+            max-width: 100%;
+            margin: 15px auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .service-image:hover {
+            transform: scale(1.02);
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @media screen and (min-width: 768px) {
+            .header {
+                min-height: 400px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .service-buttons {
+                grid-template-columns: repeat(6, 1fr);
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .features {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2px;
+            }
+
+            .contact-buttons, .regions, .service-cards {
+                max-width: 800px;
+                margin: 20px auto;
+            }
+
+            .service-image {
+                max-width: 800px;
+                margin: 30px auto;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .service-image:hover {
+                transform: scale(1.03);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            }
+
+            .service-button {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+
+            .service-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+
+            .region-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 4px 4px 8px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.9);
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .header {
+                min-height: 500px;
+            }
+
+            .content-wrapper {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                align-items: start;
+            }
+
+            .features {
+                margin: 0;
+            }
+
+            .regions {
+                margin: 0;
+            }
+        }
+
+        /* 添加平滑滚动效果 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 优化动画性能 */
+        .service-button, .region-item, .service-image {
+            will-change: transform;
+        }
+
+        /* 添加暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            .service-button, .feature, .regions, .service-cards {
+                background-color: rgba(255,255,255,0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="header">
+            <img src="第一版.png" alt="" class="logo">
+            <h1 class="title">x93代练工作室</h1>
+            <div class="service-buttons">
+                <a href="#" class="service-button">大小国标</a>
+                <a href="#" class="service-button">代排位</a>
+                <a href="#" class="service-button">代上王者</a>
+                <a href="#" class="service-button">巅峰赛</a>
+                <a href="#" class="service-button">荣耀战力</a>
+                <a href="#" class="service-button">老夫子皮肤</a>
+            </div>
+        </div>
+
+        <div class="contact-buttons">
+            <a href="javascript:void(0)" class="wechat-button" onclick="showQRCode()">➤ 添加微信，咨询代练价格</a>
+            <div class="no-referral">不招手手 打手勿加</div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>高速</h3>
+                <p>急单加急<br>
+                <span>下单就打</span></p>
+            </div>
+            <div class="feature">
+                <h3>效率</h3>
+                <p>极速完成<br>
+                <span>专业代练</span></p>
+            </div>
+            <div class="feature">
+                <h3>正规</h3>
+                <p>第三方平台<br>
+                <span>担保交易下单</span></p>
+            </div>
+            <div class="feature">
+                <h3>有保障</h3>
+                <p>24小时客服<br>
+                <span>不满意退款</span></p>
+            </div>
+        </div>
+
+        <div class="regions">
+            <h2 class="regions-title">代打区服</h2>
+            <div class="region-list">
+                <div class="region-item" style="color: #2196F3;">苹果</div>
+                <div class="region-item" style="color: #4CAF50;">安卓</div>
+                <div class="region-item" style="color: #2aae67;">微信</div>
+                <div class="region-item" style="color: #FF9800;">QQ</div>
+            </div>
+        </div>
+
+        <div class="service-cards">
+            <div class="service-card">
+                <h3>最新上分案例</h3>
+                <p>
+                    巅峰赛2小时上榜 | 排位24小时上星耀<br>
+                    专业代练团队 稳定安全可靠
+                </p>
+            </div>
+        </div>
+
+        <img src="q31.jpg" alt="服务展示" class="service-image">
+        <img src="da1.jpg" alt="服务展示" class="service-image">
+        <img src="q1.jpg" alt="服务展示" class="service-image">
+        <img src="q2.jpg" alt="服务展示" class="service-image">
+        <img src="q3.jpg" alt="服务展示" class="service-image">
+        <img src="q4.jpg" alt="服务展示" class="service-image">
+        <img src="e1.jpg" alt="服务展示" class="service-image">
+        <img src="r1.jpg" alt="服务展示" class="service-image">
+
+        <div class="service-cards" style="background: transparent;">
+            <div class="service-card" style="background: rgba(255, 255, 255, 0.8); border: 2px solid #ffd700; backdrop-filter: blur(5px);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 20px; background: linear-gradient(120deg, #ffd700, #ff9933); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800;">代打流程</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; padding: 10px 20px;">
+                    <div style="font-size: 1.1rem; color: #333; font-weight: 500;">1. 咨询客服</div>
+                    <div style="font-size: 1.1rem; color: #333; font-weight: 500;">2. 告知代打需求</div>
+                    <div style="font-size: 1.1rem; color: #333; font-weight: 500;">3. 支付代打费用</div>
+                    <div style="font-size: 1.1rem; color: #333; font-weight: 500;">4. 开始代打</div>
+                    <div style="font-size: 1.1rem; color: #333; font-weight: 500;">5. 我方代打完成</div>
+                    <div style="font-size: 1.1rem; color: #333; font-weight: 500;">6. 客户上号验收</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加底部间距，避免被固定按钮遮挡 -->
+        <div style="height: 70px;"></div>
+
+        <!-- 添加页脚信息 -->
+        <div style="background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); padding: 30px 20px; border-radius: 15px; margin: 15px; color: white; text-align: center;">
+            <div style="margin-bottom: 25px;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: #ffd700;">联系我们</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.1rem; color: #ffd700; margin-bottom: 5px;">客服微信</div>
+                        <div style="color: #fff;">x93dl</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.1rem; color: #ffd700; margin-bottom: 5px;">客服QQ</div>
+                        <div style="color: #fff;">666888999</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px; color: #ffd700;">关注我们</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.1rem; color: #ffd700; margin-bottom: 5px;">抖音号:41529871</div>
+                        <img src="抖音.png" alt="抖音" style="width: 50px; height: 50px; margin-bottom: 10px;">
+                        
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.1rem; color: #ffd700; margin-bottom: 5px;">快手号:13135781</div>
+                        <img src="快手.png" alt="快手" style="width: 50px; height: 50px; margin-bottom: 10px;">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p style="color: #999; font-size: 0.9rem; line-height: 1.6;">
+                    <br>
+                    专业代练团队 值得信赖<br>
+                    24小时在线服务
+                </p>
+                <div style="color: #666; font-size: 0.8rem; margin-top: 15px;">
+                    © 2024 x93代练工作室 版权所有
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 70px;"></div>
+
+        <a href="#" class="contact-fixed">➤ 添加微信，咨询代练价格</a>
+
+        <div class="modal" id="qrModal" onclick="hideQRCode(event)">
+            <div class="modal-content">
+                <button class="close-button" onclick="hideQRCode(event)">×</button>
+                <h3>扫码添加微信</h3>
+                <img src="f88.jpg" alt="" class="qr-code">
+                <p>扫描上方二维码添加微信</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQRCode() {
+            document.getElementById('qrModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideQRCode(event) {
+            if (event.target === document.getElementById('qrModal') || 
+                event.target.className === 'close-button') {
+                document.getElementById('qrModal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
+</body>
+</html>
