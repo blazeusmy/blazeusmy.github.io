@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>x93代练</title>
+    <link rel="icon" type="image/x-icon" href="第一版.png">
+    <!-- 如果需要支持更多设备，可以添加以下代码 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="第一版.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="第一版.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="第一版.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* 禁用所有元素的点击高亮 */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        /* 为所有可交互元素禁用点击效果 */
+        a, button, .feature, .region-item, .service-button, .service-card {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none; /* 移除焦点轮廓 */
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 500px;
+            background: url('f11.jpg') center;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            margin: 0 auto;
+        }
+
+        .header {
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('R.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: auto;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            padding: 20px 15px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: swing 3s ease-in-out infinite;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background-color: white;
+            padding: 10px; /* 增加内边距，确保图片有边距 */
+            object-fit: contain; /* 改为contain以确保完整显示图片 */
+            display: block;
+            overflow: hidden; /* 确保超出部分被裁剪 */
+        }
+
+        @keyframes swing {
+            0% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+            100% {
+                transform: rotate(-5deg);
+            }
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3),
+                         0 0 20px rgba(255,255,255,0.2);
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: uppercase;
+            background: linear-gradient(120deg, #ff3366, #ff9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding: 0 10px;
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.3),
+                            0 0 20px rgba(255,255,255,0.2);
+            }
+            50% {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.5),
+                            0 0 30px rgba(255,255,255,0.4);
+            }
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff3366, #ff9933);
+            border-radius: 3px;
+        }
+
+        .service-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .service-button {
+            background: linear-gradient(45deg, #ffd700, #ffb700); /* 黄金渐变背景 */
+            padding: 12px 0;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            color: #333; /* 深色文字 */
+            font-weight: bold;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+            border: none;
+            position: relative;
+            width: 100%; /* 填充网格单元格 */
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .service-button::before {
+            content: none; /* 移除伪元素 */
+        }
+
+        .service-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .contact-buttons {
+            margin: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.7); /* 降低不透明度 */
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px); /* 添加模糊效果 */
+        }
+
+        .wechat-button {
+            background-color: #2aae67;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(42,174,103,0.2);
+            transition: transform 0.2s;
+        }
+
+        .wechat-button:active {
+            transform: scale(0.98);
+        }
+
+        .no-referral {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .regions {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            margin: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .regions-title {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .region-list {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* 增加标签之间的间距 */
+            padding: 5px;
+        }
+
+        .region-item {
+            flex: 1;
+            text-align: center;
+            padding: 12px 5px;
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            border-radius: 10px; /* 所有标签都有圆角 */
+            border: 2px solid transparent; /* 预设透明边框 */
+        }
+        
+        /* 为每个标签设置独特的边框颜色 */
+        .region-item:nth-child(1) { /* 苹果 */
+            border-color: #2196F3;
+            color: #2196F3;
+        }
+        
+        .region-item:nth-child(2) { /* 安卓 */
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+        
+        .region-item:nth-child(3) { /* 微信 */
+            border-color: #09bb07;
+            color: #09bb07;
+        }
+        
+        .region-item:nth-child(4) { /* QQ */
+            border-color: #FF9800;
+            color: #FF9800;
+        }
+        
+        .region-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 移除旧的圆角样式，因为现在所有标签都有统一的圆角 */
+        .region-item:first-child {
+            border-radius: 10px;
+        }
+        
+        .region-item:last-child {
+            border-radius: 10px;
+        }
+        
+        .region-item:not(:first-child):not(:last-child) {
+            border-radius: 10px;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7); /* 使用半透明背景 */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.7); /* 使用半透明背景 */
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(3px);
+        }
+
+        .service-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #2aae67, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-top: 15px;
+            padding: 0 10px;
+        }
+
+        .contact-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            background-color: #2aae67;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        /* 添加移动端点击态 */
+        @media (hover: none) {
+            .service-button:active,
+            .wechat-button:active,
+            .service-card:active {
+                opacity: 0.8;
+            }
+        }
+
+        /* 针对不同屏幕尺寸的优化 */
+        @media screen and (max-width: 320px) {
+            .title {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+            .service-button {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            body {
+                width: 100%;
+            }
+            
+            .page-container {
+                width: 500px;
+            }
+            
+            .service-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #f8f8f8;
+            padding: 25px 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            width: 85%;
+            max-width: 340px;
+            animation: scaleIn 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
+            display: block;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 10px;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-code:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .close-button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        @keyframes scaleIn {
+            from { 
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .service-image {
+            width: 100%;
+            max-width: 100%;
+            margin: 15px auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .service-image:hover {
+            transform: scale(1.02);
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @media screen and (min-width: 768px) {
+            .header {
+                min-height: 400px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .service-buttons {
+                grid-template-columns: repeat(6, 1fr);
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .features {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2px;
+            }
+
+            .contact-buttons, .regions, .service-cards {
+                max-width: 800px;
+                margin: 20px auto;
+            }
+
+            .service-image {
+                max-width: 800px;
+                margin: 30px auto;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .service-image:hover {
+                transform: scale(1.03);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            }
+
+            .service-button {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+
+            .service-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+
+            .region-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 4px 4px 8px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.9);
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .header {
+                min-height: 500px;
+            }
+
+            .content-wrapper {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                align-items: start;
+            }
+
+            .features {
+                margin: 0;
+            }
+
+            .regions {
+                margin: 0;
+            }
+        }
+
+        /* 添加平滑滚动效果 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 优化动画性能 */
+        .service-button, .region-item, .service-image {
+            will-change: transform;
+        }
+
+        /* 添加暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            .service-button, .feature, .regions, .service-cards {
+                background-color: rgba(255,255,255,0.9);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .social-icon-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+        
+        /* 客服聊天窗口样式 */
+        .chat-icon {
+            position: fixed;
+            top: 50%; /* 改为垂直居中 */
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2aae67, #1e9d59);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            transform: translateY(-50%); /* 确保真正居中 */
+        }
+        
+        .chat-icon:hover {
+            transform: translateY(-50%) scale(1.1); /* 保持居中并添加放大效果 */
+        }
+        
+        /* 添加最小化图标样式 */
+        .chat-icon.minimized {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            background: rgba(42,174,103,0.8);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            animation: pulse 2s infinite;
+        }
+        
+        .chat-window {
+            position: fixed;
+            top: 50%; /* 改为垂直居中 */
+            right: 20px;
+            width: 320px;
+            height: 400px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            transform: translateY(-50%); /* 确保真正居中 */
+        }
+        
+        .chat-window.active {
+            display: flex;
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #2aae67, #1e9d59);
+            padding: 15px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .minimize-chat, .close-chat {
+            background: rgba(255,255,255,0.3);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            line-height: 30px;
+        }
+        
+        .minimize-chat {
+            font-size: 20px;
+        }
+        
+        .close-chat {
+            background: rgba(255, 65, 65, 0.7);
+            color: white;
+            font-size: 20px;
+        }
+        
+        .minimize-chat:hover, .close-chat:hover {
+            background: rgba(255,255,255,0.5);
+            transform: scale(1.05);
+        }
+        
+        .close-chat:hover {
+            background: rgba(255, 65, 65, 0.9);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+        
+        .message {
+            margin-bottom: 10px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            position: relative;
+            clear: both;
+            word-wrap: break-word;
+        }
+        
+        .message.user {
+            background: #e1ffc7;
+            float: right;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message.agent {
+            background: white;
+            float: left;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: #f5f5f5;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            border: none;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            outline: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .send-button {
+            background: #2aae67;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="header">
+            <img src="第二版log.jpg" alt="logo" class="logo">
+            <h1 class="title">x93代练工作室</h1>
+            <div class="service-buttons">
+                <a href="#" class="service-button">大小国标</a>
+                <a href="#" class="service-button">代排位</a>
+                <a href="#" class="service-button">代上王者</a>
+                <a href="#" class="service-button">巅峰赛</a>
+                <a href="#" class="service-button">荣耀战力</a>
+                <a href="#" class="service-button">圣诞老人</a>
+            </div>
+            <p style="color: #fff; font-size: 0.9rem; margin-top: 10px; text-align: center; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                左侧点击咨询客服按钮了解详情 | 支持所有区服 | 24小时接单
+            </p>
+        </div>
+
+        <div class="contact-buttons">
+            <a href="javascript:void(0)" class="wechat-button" onclick="showQRCode()">➤ 添加微信，咨询代练价格</a>
+            <div class="no-referral">不招打手 打手勿加</div>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 10px; text-align: center;">
+                💡 添加微信可享首单优惠 | 咨询不收费 | 价格透明
+            </p>
+        </div>
+
+        <!-- 优化后的特性模块 -->
+        <div style="margin: 20px 15px; padding: 0;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                <!-- 高速 -->
+                <div style="background: linear-gradient(135deg, #ffedbc, #ffdb7e); padding: 20px 15px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); position: relative; overflow: hidden; transition: all 0.3s ease;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: #e74c3c; font-weight: 800; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">高速</h3>
+                    <p style="color: #333; font-size: 1.1rem; line-height: 1.6; font-weight: 600;">急单加急</p>
+                    <p style="color: #666; font-size: 1rem; margin-top: 5px;">下单就打</p>
+                    <div style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: rgba(231, 76, 60, 0.1); border-radius: 0 0 0 100%; z-index: 1;"></div>
+                </div>
+
+                <!-- 效率 -->
+                <div style="background: linear-gradient(135deg, #d4fc79, #a8e063); padding: 20px 15px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); position: relative; overflow: hidden; transition: all 0.3s ease;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: #27ae60; font-weight: 800; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">效率</h3>
+                    <p style="color: #333; font-size: 1.1rem; line-height: 1.6; font-weight: 600;">极速完成</p>
+                    <p style="color: #666; font-size: 1rem; margin-top: 5px;">专业代练</p>
+                    <div style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: rgba(39, 174, 96, 0.1); border-radius: 0 0 0 100%; z-index: 1;"></div>
+                </div>
+
+                <!-- 正规 -->
+                <div style="background: linear-gradient(135deg, #a1c4fd, #8fd3f4); padding: 20px 15px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); position: relative; overflow: hidden; transition: all 0.3s ease;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: #2980b9; font-weight: 800; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">正规</h3>
+                    <p style="color: #333; font-size: 1.1rem; line-height: 1.6; font-weight: 600;">第三方平台</p>
+                    <p style="color: #666; font-size: 1rem; margin-top: 5px;">担保交易下单</p>
+                    <div style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: rgba(41, 128, 185, 0.1); border-radius: 0 0 0 100%; z-index: 1;"></div>
+                </div>
+
+                <!-- 有保障 -->
+                <div style="background: linear-gradient(135deg, #fad0c4, #f3a183); padding: 20px 15px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); position: relative; overflow: hidden; transition: all 0.3s ease;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: #d35400; font-weight: 800; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">有保障</h3>
+                    <p style="color: #333; font-size: 1.1rem; line-height: 1.6; font-weight: 600;">24小时客服</p>
+                    <p style="color: #666; font-size: 1rem; margin-top: 5px;">不满意退款</p>
+                    <div style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: rgba(211, 84, 0, 0.1); border-radius: 0 0 0 100%; z-index: 1;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="regions">
+            <h2 class="regions-title">代打区服</h2>
+            <div class="region-list">
+                <div class="region-item" style="color: #2196F3;">苹果</div>
+                <div class="region-item" style="color: #4CAF50;">安卓</div>
+                <div class="region-item" style="color: #2aae67;">微信</div>
+                <div class="region-item" style="color: #FF9800;">QQ</div>
+            </div>
+            <p style="font-size: 0.85rem; color: #555; margin-top: 10px; text-align: center;">
+                ✅ 全平台服务，无需担心兼容问题 | 安全无风险
+            </p>
+        </div>
+
+        <img src="33.png" alt="服务展示" class="service-image">
+        <img src="da1.jpg" alt="服务展示" class="service-image">
+        <img src="q1.jpg" alt="服务展示" class="service-image">
+        <img src="q2.jpg" alt="服务展示" class="service-image">
+        <img src="q3.jpg" alt="服务展示" class="service-image">
+        <img src="q4.jpg" alt="服务展示" class="service-image">
+        <img src="e1.jpg" alt="服务展示" class="service-image">
+        <img src="r1.jpg" alt="服务展示" class="service-image">
+        <img src="代打流程.png" alt="代打流程" class="service-image">
+
+        <!-- 添加页脚信息 -->
+        <div style="background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); padding: 30px 20px; border-radius: 15px; margin: 15px; color: white; text-align: center;">
+            <div style="margin-bottom: 25px; display: flex; flex-direction: column; align-items: center;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 20px; color: #ffd700;">联系我们</h3>
+                <div style="display: flex; justify-content: center; gap: 40px; margin-top: 10px; width: 100%; max-width: 300px;">
+                    <!-- 微信图标和号码 - 使用简单的图片引用 -->
+                    <div style="text-align: center; flex: 1;">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 10px; border-radius: 50%; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease;" class="social-icon-container">
+                            <img src="微信.jpg" alt="微信" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="font-size: 1rem; color: #fff; margin-top: 5px;">客服微信</div>
+                        <div style="font-size: 1.1rem; color: #ffd700; font-weight: bold;">151811</div>
+                    </div>
+                    
+                    <!-- QQ图标和号码 - 使用简单的图片引用 -->
+                    <div style="text-align: center; flex: 1;">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 10px; border-radius: 50%; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease;" class="social-icon-container">
+                            <img src="qq.png" alt="QQ" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="font-size: 1rem; color: #fff; margin-top: 5px;">客服QQ</div>
+                        <div style="font-size: 1.1rem; color: #ffd700; font-weight: bold;">2315161</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 25px; display: flex; flex-direction: column; align-items: center;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 20px; color: #ffd700;">关注我们</h3>
+                <div style="display: flex; justify-content: center; gap: 40px; margin-top: 10px; width: 100%; max-width: 300px;">
+                    <!-- 抖音图标和号码 - 使用本地图片 -->
+                    <div style="text-align: center; flex: 1;">
+                        <div class="social-icon-container" style="position: relative; width: 70px; height: 70px; margin: 0 auto 10px; background: linear-gradient(135deg, #FF0050, #00F2EA); border-radius: 50%; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; overflow: hidden;">
+                            <img src="抖音.png" alt="抖音" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="font-size: 1rem; color: #fff; margin-top: 5px;">抖音号</div>
+                        <div style="font-size: 1.1rem; color: #ffd700; font-weight: bold;">41529871</div>
+                    </div>
+                    
+                    <!-- 快手图标和号码 - 使用本地图片 -->
+                    <div style="text-align: center; flex: 1;">
+                        <div class="social-icon-container" style="position: relative; width: 70px; height: 70px; margin: 0 auto 10px; background: linear-gradient(135deg, #FFC400, #FF4D00); border-radius: 50%; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; overflow: hidden;">
+                            <img src="快手.png" alt="快手" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </div>
+                        <div style="font-size: 1rem; color: #fff; margin-top: 5px;">快手号</div>
+                        <div style="font-size: 1.1rem; color: #ffd700; font-weight: bold;">13135781</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p style="color: #999; font-size: 0.9rem; line-height: 1.6;">
+                    <br>
+                    专业代练团队 值得信赖<br>
+                    24小时在线服务
+                </p>
+                <div style="color: #666; font-size: 0.8rem; margin-top: 15px;">
+                    © 2024 x93代练工作室 版权所有
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 70px;"></div>
+
+        <a href="#" class="contact-fixed">➤ 添加微信，咨询代练价格</a>
+        
+        <!-- 客服聊天图标 - 添加minimized类 -->
+        <div class="chat-icon minimized" onclick="toggleChat()">💬</div>
+        
+        <!-- 客服聊天窗口 -->
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div>在线客服</div>
+                <div class="chat-header-actions">
+                    <div class="minimize-chat" onclick="minimizeChat()" title="最小化">—</div>
+                    <div class="close-chat" onclick="closeChat()" title="关闭">X</div>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message agent">您好，欢迎来到x93代练工作室，有什么可以帮您的吗？</div>
+                <div class="message agent">您可以咨询：价格多少？多久能完成？怎么下单？账号安全吗？</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="输入您的问题，例如：王者代练多少钱？" id="chatInput" onkeypress="if(event.keyCode === 13) sendMessage()">
+                <button class="send-button" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+
+        <div class="modal" id="qrModal" onclick="hideQRCode(event)">
+            <div class="modal-content">
+                <button class="close-button" onclick="hideQRCode(event)">×</button>
+                <h3>扫码添加微信</h3>
+                <img src="f88.jpg" alt="" class="qr-code">
+                <p>扫描上方二维码添加微信</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载完成后自动显示微信二维码窗口
+        window.onload = function() {
+            // 延迟1.5秒后显示窗口，给用户一点时间先看网站
+            setTimeout(function() {
+                showQRCode();
+            }, 1500);
+            
+            // 确保聊天图标在页面加载时显示为最小化状态
+            const chatIcon = document.querySelector('.chat-icon');
+            chatIcon.classList.add('minimized');
+        };
+        
+        function showQRCode() {
+            document.getElementById('qrModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideQRCode(event) {
+            if (event.target === document.getElementById('qrModal') || 
+                event.target.className === 'close-button') {
+                document.getElementById('qrModal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            const chatIcon = document.querySelector('.chat-icon');
+            
+            if (chatWindow.classList.contains('active')) {
+                // 如果聊天窗口是打开的，关闭窗口
+                chatWindow.classList.remove('active');
+                chatIcon.style.display = 'flex';
+                // 关闭后保持最小化状态
+                chatIcon.classList.add('minimized');
+            } else {
+                // 如果聊天窗口是关闭的，打开窗口并隐藏图标
+                chatWindow.classList.add('active');
+                chatIcon.style.display = 'none';
+                
+                // 如果是首次打开聊天窗口，添加提示性气泡
+                if (!window.chatOpened) {
+                    window.chatOpened = true;
+                    setTimeout(() => {
+                        const chatMessages = document.getElementById('chatMessages');
+                        const tipMessage = document.createElement('div');
+                        tipMessage.className = 'message agent';
+                        tipMessage.innerHTML = '<strong>热门问题：</strong><br>- 钻石到王者多少钱？<br>- 巅峰赛代练怎么收费？<br>- 下单流程是什么？';
+                        chatMessages.appendChild(tipMessage);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 2000);
+                }
+            }
+        }
+        
+        // 添加最小化聊天窗口的函数
+        function minimizeChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            const chatIcon = document.querySelector('.chat-icon');
+            
+            // 关闭聊天窗口
+            chatWindow.classList.remove('active');
+            
+            // 显示聊天图标并添加最小化样式
+            chatIcon.style.display = 'flex';
+            chatIcon.classList.add('minimized');
+            
+            // 添加动画效果
+            chatIcon.animate([
+                { transform: 'translateY(-50%) scale(0.5)' },
+                { transform: 'translateY(-50%) scale(1)' }
+            ], {
+                duration: 300,
+                easing: 'ease-out'
+            });
+            
+            // 移除警告提示
+            // alert('聊天窗口已最小化，点击右侧小图标可恢复');
+        }
+        
+        // 添加关闭聊天窗口的函数
+        function closeChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            const chatIcon = document.querySelector('.chat-icon');
+            
+            // 关闭聊天窗口
+            chatWindow.classList.remove('active');
+            
+            // 显示图标并保持最小化状态
+            chatIcon.style.display = 'flex';
+            chatIcon.classList.add('minimized');
+            
+            // 添加动画效果
+            chatIcon.animate([
+                { opacity: 0.5 },
+                { opacity: 1 }
+            ], {
+                duration: 300,
+                easing: 'ease-out'
+            });
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messageText = input.value.trim();
+            
+            if (messageText) {
+                const chatMessages = document.getElementById('chatMessages');
+                
+                // 添加用户消息
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.textContent = messageText;
+                chatMessages.appendChild(userMessage);
+                
+                // 清空输入框
+                input.value = '';
+                
+                // 滚动到底部
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // 使用智能回复系统
+                const autoResponse = getAutoResponse(messageText.toLowerCase());
+                
+                // 模拟延迟，给用户一种正在输入的感觉
+                setTimeout(() => {
+                    const agentMessage = document.createElement('div');
+                    agentMessage.className = 'message agent';
+                    agentMessage.textContent = autoResponse;
+                    chatMessages.appendChild(agentMessage);
+                    
+                    // 滚动到底部
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 800);
+            }
+        }
+        
+        // 智能回复系统
+        function getAutoResponse(message) {
+            // 价格相关问题
+            if (message.includes('价格') || message.includes('多少钱') || message.includes('费用') || message.includes('收费')) {
+                return '我们的代练价格根据段位和需求有所不同：\n- 黄金到铂金：100-200元\n- 铂金到钻石：200-400元\n- 钻石到星耀：400-800元\n- 星耀到王者：800-1500元\n详情可添加微信咨询更多优惠。\n\n💡 您还可以咨询：安全问题、完成时间、下单流程';
+            } 
+            // 时间相关问题
+            else if (message.includes('时间') || message.includes('多久') || message.includes('周期') || message.includes('几天')) {
+                return '我们的代练时间：\n- 普通订单：1-3天完成\n- 加急订单：24小时内完成\n- 特急订单：最快6-12小时完成\n具体视段位和难度而定，我们保证高效率和高质量！\n\n💡 您还可以咨询：价格、安全保障、代练流程';
+            } 
+            // 安全相关问题
+            else if (message.includes('安全') || message.includes('保障') || message.includes('保证') || message.includes('风险')) {
+                return '关于账号安全，请放心：\n1. 我们使用第三方平台担保交易\n2. 所有代练师均经过严格筛选\n3. 全程使用专业加速器，不会导致异常\n4. 提供不满意退款保证\n5. 24小时客服在线解决问题';
+            } 
+            // 联系方式相关问题 
+            else if (message.includes('微信') || message.includes('联系') || message.includes('客服') || message.includes('怎么找你')) {
+                return '您可以通过以下方式联系我们：\n- 微信号：151811\n- QQ号：2315161\n- 抖音号：41529871\n- 快手号：13135781\n添加时请备注"代练"，我们会优先处理您的咨询。';
+            } 
+            // 区服平台相关问题
+            else if (message.includes('区服') || message.includes('平台') || message.includes('安卓') || message.includes('苹果') || message.includes('ios')) {
+                return '我们支持所有主流平台的代练服务：\n- 苹果iOS\n- 安卓\n- 微信区\n- QQ区\n所有区服无缝对接，请放心选择！';
+            }
+            // 代练项目相关问题
+            else if (message.includes('王者') || message.includes('荣耀') || message.includes('巅峰赛') || message.includes('排位') || message.includes('战力')) {
+                return '我们提供多种代练服务：\n- 排位代打（各段位）\n- 巅峰赛代打\n- 战力提升\n- 国标/省标代打\n- 定制化代练方案\n请问您需要哪种服务呢？';
+            }
+            // 询问流程
+            else if (message.includes('流程') || message.includes('怎么') || message.includes('下单') || message.includes('订单')) {
+                return '代练流程非常简单：\n1. 添加客服微信咨询\n2. 确认代练需求和价格\n3. 通过第三方平台下单\n4. 开始代练并提供进度反馈\n5. 完成后验收确认\n整个过程透明高效，随时可查看进度！';
+            }
+            // 打手相关问题
+            else if (message.includes('打手') || message.includes('代练师') || message.includes('技术')) {
+                return '我们的代练师均为职业级选手：\n- 最低王者200星以上水平\n- 多数为战队现役/退役选手\n- 熟悉各种英雄和阵容\n- 专业加速器保障顺畅体验\n绝对一流的技术水平！\n\n💡 您还可以咨询：价格、时间周期、安全保障';
+            }
+            // 问候语或默认回复
+            else if (message.includes('你好') || message.includes('在吗') || message.includes('在么') || message.includes('哈喽') || message.includes('hello')) {
+                return '您好！欢迎咨询x93代练工作室，请问有什么可以帮您的吗？\n\n💡 常见问题：\n- 代练价格怎么算？\n- 多久能完成？\n- 怎么保证账号安全？\n- 有哪些服务项目？';
+            }
+            // 默认回复
+            else {
+                return '感谢您的咨询！如果您有关于代练价格、流程、安全保障等问题，可以直接告诉我。或者添加微信号：151811，获取更详细的服务介绍和专属优惠。\n\n💡 试试问我：\n- "排位代打多少钱？"\n- "账号安全吗？"\n- "怎么下单？"';
+            }
+        }
+    </script>
+</body>
+</html>
